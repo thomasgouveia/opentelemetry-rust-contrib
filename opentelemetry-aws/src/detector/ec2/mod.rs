@@ -29,6 +29,8 @@ impl Default for EC2ResourceDetector {
 impl ResourceDetector for EC2ResourceDetector {
     fn detect(&self, timeout: Duration) -> Resource {
         let result = self.client.get_instance_identity_document(timeout);
+
+        println!("{:#?}", result);
         if result.is_err() {
             return Resource::empty();
         }
